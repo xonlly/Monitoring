@@ -1,0 +1,22 @@
+{
+  "name": "monitoring",
+  "version": "1.0.0",
+  "description": "Monitoring de serveurs / Projets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xonlly/Monitoring.git"
+  },
+  "keywords": [
+    "monitoring"
+  ],
+  "author": "Xonlly Devteck",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/xonlly/Monitoring/issues"
+  },
+  "homepage": "https://github.com/xonlly/Monitoring#readme"
+}
