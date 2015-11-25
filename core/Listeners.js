@@ -8,6 +8,8 @@ module.exports = class Listeners  {
     this.io = io;
     this.config = config;
 
+    Projects.setIo(io);
+
     // init
     this.init()
   }
@@ -35,7 +37,7 @@ module.exports = class Listeners  {
   }
 
   Gestion() {
-
+    var clientsListener = {};
     this.io
       .of('/project')
       .on('connection', (socket) => {
@@ -58,11 +60,31 @@ module.exports = class Listeners  {
 
         socket.on('data', (data) => {
           Projects.update(socket, data);
+          socket.broadcast.to('listener').emit('data', data);
+          console.log('this data');
+        })
+
+        socket.on('listenData', () => {
+          console.log('join');
+          socket.join('listener')
         })
 
         socket.on('disconnect', () => {
           Projects.remove(socket);
         })
+      });
+
+      this.io
+      .of('/listener')
+      .on('connection', (socket) => {
+
+        console.log('new client')
+        socket.join('listener')
+
+        socket.on('disconnect', () => {
+          socket.leave('listener')
+        })
+
       })
 
 

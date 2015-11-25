@@ -11,20 +11,28 @@ module.exports = class Projects {
     this.ping();
   }
 
+  setIo(io) {
+    this.io = io;
+  }
+
   ping() {
     setInterval(() => {
+
+      this.io.of('/project').in('serveurs').emit('update', {});
+      //socket.broadcast.to('serveurs').emit('update', {});
+      /*
       Object.keys(this.projects).forEach((key) => {
         // The Slave is down, i dont need ping.
         if (!this.projects[key].status) return;
 
-        console.log('Send ping to', this.projects[key].Name, this.projects[key].status)
+      //  console.log('Send ping to', this.projects[key].Name, this.projects[key].status)
         this.projects[key].socket.emit('update', {}, (e) => { console.log('test',e) });
 
         // Create final object.
         this.public_projects[this.projects[key].Name] = this.projects[key];
 
-        console.log(this.public_projects);
-      })
+        //console.log(this.public_projects[this.projects[key].Name].data.os);
+      })*/
     },1000)
   }
 
@@ -53,12 +61,14 @@ module.exports = class Projects {
       data : {},
     }
 
+    socket.join('serveurs')
+
     // Try callback addRoute
     this.callOnAddRoute(this.projects[socket.id]);
   }
 
   remove(socket) {
-    console.log('Serveur is down')
+    if (!this.projects[socket.id]) return;
     this.projects[socket.id].status = false
   }
 
