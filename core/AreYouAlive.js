@@ -8,5 +8,16 @@ module.exports = class AreYouAlive {
   }
 
 
+  isOffline(callback) {
 
+  }
+
+  isOnline(callback) {
+
+  }
+
+  newStats(callback) {
+
+  }
+  
 }

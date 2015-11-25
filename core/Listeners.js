@@ -39,7 +39,7 @@ module.exports = class Listeners  {
     this.io
       .of('/project')
       .on('connection', (socket) => {
-
+        console.log('new connection');
         // data.apikey, data.projectName
         socket.on('add', (data) => {
           if (data.apikey != this.config.APIKEY) return; // For all !
@@ -56,7 +56,16 @@ module.exports = class Listeners  {
           Projects.update(socket, data);
         })
 
+        socket.on('data', (data) => {
+          Projects.update(socket, data);
+        })
+
+        socket.on('disconnect', () => {
+          Projects.remove(socket);
+        })
       })
+
+
       // Pour la gestion des users, surement ici plus tard
   }
 
