@@ -4,7 +4,7 @@
   "description": "Monitoring de serveurs / Projets",
   "main": "index.js",
   "scripts": {
-    "test": ""
+    "dev": "webpack-dev-server --content-base src/"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,12 @@
   },
   "homepage": "https://github.com/xonlly/Monitoring#readme",
   "dependencies": {
+    "babel-runtime": "^6.3.13",
     "jasmine": "^2.3.2",
     "socket.io": "^1.3.7",
-    "socket.io-client": "^1.3.7"
+    "webpack": "^1.12.9"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^1.14.0"
   }
 }

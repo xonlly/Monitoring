@@ -45,15 +45,15 @@
 		});
 	}
 	</script>
-  <script src="//127.0.0.1:8156/socket.io/socket.io.js"></script>
+  <script src="http://127.0.0.1:8156/socket.io/socket.io.js"></script>
 
 
 
 
   <script>
-    var socket = io('//127.0.0.1:8156/project');
+    var socket = io('http://127.0.0.1:8156/');
     var nb=0;
-
+		window.socketio = socket;
     socket.on('data', function (data) {
       console.log("yah", data);
       //window.myBar.datasets[0].bars.push(data.os.cpuAverage);
