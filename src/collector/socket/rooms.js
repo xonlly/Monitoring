@@ -21,7 +21,7 @@ class Rooms {
 
     /* Server send new infos */
     socket.on('update', (data) => {
-      console.log('update')
+      console.log('update', data)
     })
 
   }

@@ -4,14 +4,30 @@ const SocketClient = require('../transmitter/socket')
 
 class Client extends SocketClient {
 
+
+
   constructor( options ) {
     super( options )
 
     const socket = this.get()
-    
-    socket.on('connect', function(){});
-    socket.on('event', function(data){});
-    socket.on('disconnect', function(){});
+
+    this.options = {
+      connected : false
+    }
+
+    setInterval(() => {
+      if (!this.options.connected) return false;
+
+      socket.emit('update', this.osGetAll())
+
+    }, 1000)
+
+    socket.on('connect', () => {
+      this.options.connected = true
+    });
+    socket.on('disconnect', () => {
+      this.options.connected = false
+    });
   }
 }
 
