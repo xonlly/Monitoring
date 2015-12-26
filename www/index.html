@@ -54,21 +54,22 @@
     var socket = io('http://127.0.0.1:8156/');
     var nb=0;
 		window.socketio = socket;
+		socket.emit('room', { room : 'client'})
     socket.on('data', function (data) {
       console.log("yah", data);
-      //window.myBar.datasets[0].bars.push(data.os.cpuAverage);
-      //barChartData.datasets[0].data.push(data.os.cpuAverage)
-      console.log(data.os.cpuAverage);
+      //window.myBar.datasets[0].bars.push(data.cpuAverage);
+      //barChartData.datasets[0].data.push(data.cpuAverage)
+      /*console.log(data.cpuAverage);
       nb++;
       if (nb>20) {
-      window.myBar.removeData();
-    }
+	      window.myBar.removeData();
+	    }
 
     var Datea = new Date();
 
-      window.myBar.addData([data.os.cpuAverage, data.os.mempourcent],
+      window.myBar.addData([data.cpuAverage, data.mempourcent],
         Datea.getHours()+"h"+Datea.getMinutes()+":"+Datea.getSeconds())
-
+*/
       //window.myBar.update();
     });
 

@@ -21,7 +21,9 @@ class Rooms {
 
     /* Server send new infos */
     socket.on('update', (data) => {
-      console.log('update', data)
+
+      io.sockets.in('clients').emit('data', { id : socket.id, os : data });
+
     })
 
   }

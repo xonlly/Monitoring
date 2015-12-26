@@ -20,7 +20,7 @@ class Clients extends Rooms {
           socket.join( 'servers' )
           break;
         case 'client':
-          socket.join( 'client' )
+          socket.join( 'clients' )
           break;
         default:
 
