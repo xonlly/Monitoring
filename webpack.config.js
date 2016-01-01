@@ -1,45 +1,33 @@
 var path = require('path');
+var plugins = [];
 
 module.exports = {
-    entry: {
-      client : "./src/client.js",
-      server : "./src/server.js"
-    },
+  entry : {
+    'build' : path.join(__dirname, 'www/js/core.js')
+  },
 
-    output: {
-        path: __dirname,
-        filename: "./dist/[name].js"
-    },
+  output : {
+    path: path.join(__dirname, 'www/js'),
+    filename: '[name].js',
+    publicPath: '/',
+  },
 
-    resolve: {
-      extensions: ['', '.js', '.jsx', 'index.js', 'index.jsx', '.json', 'index.json']
-    },
+/*  resolve: {
+    extensions: [
+      ".js",
+    ],
+  },*/
 
-    module: {
-      preLoaders: [
-          { test: /\.json$/, loader: "json-loader" }
-      ],
+  module : {
+    loaders: [
+      {
+        test: /\.js$/,
+        loaders: [
+          'babel?stage=0'
+        ]
+      }
+    ]
+  },
 
-      loaders: [
-        {
-          loader: "babel-loader",
-
-          // Skip any files outside of your project's `src` directory
-          include: [
-            path.resolve(__dirname, "src"),
-          ],
-
-          exclude: [/node_modules/],
-
-          // Only run `.js` and `.jsx` files through Babel
-          test: /\.js?$/,
-
-          // Options to configure babel with
-          query: {
-            plugins: ['transform-runtime'],
-            presets: ['es2015', 'stage-0'/*, 'react'*/],
-          }
-        },
-      ]
-    }
+  plugins: plugins
 };
