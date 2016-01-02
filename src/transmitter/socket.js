@@ -11,7 +11,7 @@ class SocketClient extends os {
 
     super( options )
 
-    const dom = (options.host || '127.0.0.1')
+    const dom = (options.host || options.server || '127.0.0.1')
 
     if (!this.isDomain(dom)) {
       console.log('Fail on check domain, the domain is not valid', dom)
