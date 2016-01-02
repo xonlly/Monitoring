@@ -10,17 +10,22 @@ class Clients extends Rooms {
 
   connection( socket ) {
 
-    this.initServers( socket )
 
     /* if user need change room */
     socket.on('room', (data) => {
       console.log('change room', data);
-      switch (data.room) {
-        case 'servers':
+      switch (data) {
+        case 'server':
+
           socket.join( 'servers' )
+          this.initServer( socket )
+          
           break;
         case 'client':
+
           socket.join( 'clients' )
+          this.initClient( socket )
+
           break;
         default:
 
@@ -29,9 +34,6 @@ class Clients extends Rooms {
 
   }
 
-  disconnect( socket ) {
-
-  }
 
 }
 

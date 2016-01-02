@@ -24,7 +24,9 @@ class Client extends SocketClient {
 
     socket.on('connect', () => {
       this.options.connected = true
+      socket.emit('room', 'server')
     });
+
     socket.on('disconnect', () => {
       this.options.connected = false
     });

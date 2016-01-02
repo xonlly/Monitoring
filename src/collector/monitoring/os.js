@@ -88,6 +88,7 @@ class OsMonitor {
 
   osGetAll() {
     return {
+      name : os.hostname(),
       arch: os.arch(),
       cpus: os.cpus(),
       freemem: os.freemem(),
