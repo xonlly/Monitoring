@@ -21,22 +21,14 @@
   },
   "homepage": "https://github.com/xonlly/Monitoring#readme",
   "dependencies": {
-    "babel": "^6.3.26",
-    "babel-cli": "^6.3.17",
-    "babel-runtime": "^6.3.13",
     "blessed": "^0.1.81",
-    "jasmine": "^2.3.2",
-    "react": "^0.14.5",
+    "colors": "^1.1.2",
     "socket.io": "^1.3.7",
     "socket.io-client": "^1.3.7",
     "term.js": "0.0.7",
     "webpack": "^1.12.9"
   },
   "devDependencies": {
-    "babel-core": "^6.3.26",
-    "babel-loader": "^6.2.0",
-    "babel-preset-react": "^6.3.13",
-    "babel-preset-stage-0": "^6.3.13",
     "webpack-dev-server": "^1.14.0"
   }
 }

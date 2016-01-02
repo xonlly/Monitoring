@@ -1,8 +1,29 @@
 var blessed = require('blessed');
+
+var argsGetted = { port : false, host : false, key : false };
+
+process.argv.forEach(function(val, index, array) {
+  switch (val) {
+    case '-p': // Port
+      argsGetted.port = array[index+1];
+      break;
+
+    case '-h': // Host
+      argsGetted.host = array[index+1];
+      break;
+
+    case '-key':
+    case '-k': // key
+      argsGetted.key = array[index+1];
+      break
+  }
+});
+
+
 var config = {
-  server : '127.0.0.1',
-  port : 8156,
-  key : '456DAde486qD684de6'
+  server : argsGetted.host || '127.0.0.1',
+  port : argsGetted.port || 8156,
+  key : argsGetted.key || '456DAde486qD684de6'
 };
 
 var toHHMMSS = function (number) {
@@ -23,24 +44,39 @@ var socket = require('socket.io-client')('http://'+config.server+':'+config.port
 var status = 'offline';
 
 socket.on('connect', function(){
-  statusBar.setText('Status: online');
-  statusBar.style.bg = 'default'
-  statusBar.style.fg = 'green'
-//  progress.setProgress(40);
-  screen.render();
-  socket.emit('room', 'client')
+  socket.emit('auth', config.key);
 });
+
+socket.on('isAuth', function (data) {
+  if (data.success) {
+
+    statusBar.setText('Status: online');
+    statusBar.style.bg = 'default'
+    statusBar.style.fg = 'green'
+    screen.render();
+    socket.emit('room', 'client')
+
+  } else {
+
+    statusBar.setText('Status: Security key not valid.');
+    statusBar.style.fg = 'red'
+    screen.render();
+
+  }
+})
+
 socket.on('update', function(data){
 
   var ids = Object.keys(data.servers);
 
   for( i=0; i<ids.length; i++) {
-    //console.log(data[ids[i]].os.cpuAverage);
+
+    // Adding visual client
     setClient(data.servers[ids[i]].os.name)
+
+    // Update infos on visual client.
     upClient(data.servers[ids[i]].os.name, data.servers[ids[i]].os, data.servers[ids[i]].online)
   }
-  //progress.setProgress(data.os.cpuAverage);
-  //text.setText(Math.floor(data.os.cpuAverage)+'%')
 
 });
 socket.on('disconnect', function(){
@@ -51,11 +87,14 @@ socket.on('disconnect', function(){
   screen.render();
 });
 
+/* Un minimum de responsive */
 var clientsOps = {
   width : 40,
   progress : 5,
   top: 3,
 }
+
+/* Les clients */
 var clients = {
   list: [],
   cpu : {},
@@ -69,6 +108,9 @@ var clients = {
 
 };
 
+/**
+ * MAJ des infos sur les cards clients
+ */
 function upClient(id, os, online) {
   if (clients.list.indexOf(id) === -1) return;
 
@@ -101,6 +143,9 @@ function upClient(id, os, online) {
   screen.render()
 }
 
+/**
+ * Ajout d'une carte visuel pour les clients
+ */
 function setClient(id) {
 
   if (clients.list.indexOf(id) !== -1) return;

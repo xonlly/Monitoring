@@ -13,8 +13,6 @@ class Socket {
 
     SocketIo.on('connection', (socket) => {
 
-      console.log('bonjour')
-
       this.clients.connection( socket )
 
       socket.on('disconnect', () => this.clients.disconnect( socket ))

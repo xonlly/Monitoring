@@ -1,5 +1,7 @@
 "use strict"
 
+const Log = require('../../utils/log')
+
 class Rooms {
 
   constructor( options, socketio ) {
@@ -20,12 +22,25 @@ class Rooms {
   }
 
   /**
+   * For check if user is auth to run.
+   */
+  isAuth( socket ) {
+    if (socket.isAuth) {
+      return true
+    } else {
+      Log.warn('User is not auth to exec this function')
+      socket.emit('isAuth', { success : false, error : 'YOU_DONT_HAVE_PERMS' })
+      return false
+    }
+  }
+
+  /**
    * Init la room pour les serveurs
    */
   initServer( socket ) {
 
     let io = this.io
-    console.log('bonjour server')
+
     /* Server send new infos */
     socket.on('update', (data) => {
       // Socket save Name.
@@ -40,7 +55,7 @@ class Rooms {
   disconnect( socket ) {
     let io = this.io
 
-      console.log('disconnect name, ', socket.nickname)
+      Log.info('Disconnect ', socket.nickname)
 
       // Is not a server
       if (!this.servers[socket.nickname]) return;
@@ -56,8 +71,7 @@ class Rooms {
   initClient( socket ) {
     let io = this.io
 
-    console.log('new client, total ' + Object.keys(io.sockets.adapter.rooms.clients).length)
-
+    Log.info('New client, total ' + Object.keys(io.sockets.adapter.rooms.clients).length)
 
   }
 
