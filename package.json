@@ -1,11 +1,14 @@
 {
   "name": "monitoring",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Monitoring de serveurs / Projets",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --content-base src/",
-    "build": "babel --presets react www/js --watch --out-dir www/build"
+    "build": "babel --presets react www/js --watch --out-dir www/build",
+    "display": "node ./display.js",
+    "server": "node ./src/server.js",
+    "client": "node ./src/client.js"
   },
   "repository": {
     "type": "git",
