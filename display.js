@@ -1,7 +1,6 @@
 var blessed = require('blessed');
 
 var argsGetted = { port : false, host : false, key : false };
-
 process.argv.forEach(function(val, index, array) {
   switch (val) {
     case '-p': // Port
