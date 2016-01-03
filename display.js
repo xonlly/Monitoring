@@ -1,29 +1,13 @@
-var blessed = require('blessed');
+'use strict'
 
-var argsGetted = { port : false, host : false, key : false };
-process.argv.forEach(function(val, index, array) {
-  switch (val) {
-    case '-p': // Port
-      argsGetted.port = array[index+1];
-      break;
-
-    case '-h': // Host
-      argsGetted.host = array[index+1];
-      break;
-
-    case '-key':
-    case '-k': // key
-      argsGetted.key = array[index+1];
-      break
-  }
-});
-
-
-var config = {
-  server : argsGetted.host || '127.0.0.1',
-  port : argsGetted.port || 8156,
-  key : argsGetted.key || '456DAde486qD684de6'
+var blessed   = require('blessed');
+var args      = require('./lib/utils/args')();
+var config    = {
+  server  : args.host   || '127.0.0.1',
+  port    : args.port   || 8156,
+  key     : args.key    || '456DAde486qD684de6'
 };
+var socket    = require('socket.io-client')('http://'+config.server+':'+config.port);
 
 var toHHMMSS = function (number) {
     var sec_num = parseInt(number, 10); // don't forget the second param
@@ -37,8 +21,6 @@ var toHHMMSS = function (number) {
     var time    = hours+'h'+minutes+'m '+seconds+'s';
     return time;
 }
-
-var socket = require('socket.io-client')('http://'+config.server+':'+config.port);
 
 var status = 'offline';
 
@@ -68,7 +50,7 @@ socket.on('update', function(data){
 
   var ids = Object.keys(data.servers);
 
-  for( i=0; i<ids.length; i++) {
+  for(var i=0; i<ids.length; i++) {
 
     // Adding visual client
     setClient(data.servers[ids[i]].os.name)
@@ -78,6 +60,7 @@ socket.on('update', function(data){
   }
 
 });
+
 socket.on('disconnect', function(){
   statusBar.style.bg = 'red'
   statusBar.style.fg = 'black'
@@ -90,6 +73,7 @@ socket.on('disconnect', function(){
 var clientsOps = {
   width : 40,
   progress : 5,
+  marginLeft: 2,
   top: 3,
 }
 
@@ -104,6 +88,8 @@ var clients = {
   average: {},
   box : {},
   currentLeft: 0,
+  top: 0,
+  maxBlocksWidth: 4,
 
 };
 
@@ -152,11 +138,11 @@ function setClient(id) {
 
   clients.box[id] = blessed.box({
     content: 'Serveur: ' + id,
-    top: clientsOps.top,
-    left: clients.currentLeft * (clientsOps.width +10)+5,
+    top: clients.top + '%+' +clientsOps.top,
+    left: clientsOps.marginLeft + (clients.currentLeft * (clientsOps.width +10)+5),
     width: clientsOps.width,
     border: 'line',
-    height: '50%',
+    height: '40%',
     style: {
       bg: '#d2d2d2',
       fg: 'black',
@@ -183,9 +169,9 @@ function setClient(id) {
     //height: 10,
     //width: 3,
     width: clientsOps.progress,
-    height: '25%',
-    left: clients.currentLeft * (clientsOps.width + 10),
-    top : clientsOps.top,
+    height: '20%',
+    left: clientsOps.marginLeft + (clients.currentLeft * (clientsOps.width + 10)),
+    top : (clients.top) + '%+' +clientsOps.top,
     filled: 0
   });
 
@@ -209,9 +195,9 @@ function setClient(id) {
     //height: 10,
     //width: 3,
     width: clientsOps.progress,
-    height: '25%',
-    left: clients.currentLeft * (clientsOps.width + 10),
-    top : '25%+'+clientsOps.top,
+    height: '20%',
+    left: clientsOps.marginLeft + (clients.currentLeft * (clientsOps.width + 10)),
+    top : (clients.top + 20)+'%+'+clientsOps.top,
     filled: 100
   });
 
@@ -219,41 +205,45 @@ function setClient(id) {
   clients.textCPU[id] = blessed.text({
     // parent: clients.cpu[id],
     content: 'CPU',
-    left: clients.currentLeft * (clientsOps.width + 10) + 1,
+    left: clientsOps.marginLeft + (clients.currentLeft * (clientsOps.width + 10) + 1),
     style: {
   //    bg: 'green',
     },
     //align: 'center',
-    top: '12%'
+    top: (clients.top + 12)+'%'
   })
 
 
   clients.textRAM[id] = blessed.text({
     // parent: clients.cpu[id],
     content: 'RAM',
-    left: clients.currentLeft * (clientsOps.width + 10) + 1,
+    left: clientsOps.marginLeft + (clients.currentLeft * (clientsOps.width + 10) + 1),
     style: {
     //  bg: 'green',
     },
     //align: 'center',
-    top: '40%'
+    top: (clients.top + 32)+'%'
   })
 
   clients.average[id] = blessed.text({
     // parent: clients.cpu[id],
     content: 'Avg',
-    left: clients.currentLeft * (clientsOps.width + 10) + 7,
+    left: clientsOps.marginLeft + (clients.currentLeft * (clientsOps.width + 10) + 7),
     style: {
       bg: 'white',
       fg: 'black',
     },
     //align: 'center',
-    top: 3+3
+    top: (clients.top )+ '%+6'
   })
 
 
   clients.currentLeft += 1;
 
+  if (clients.maxBlocksWidth == clients.currentLeft) {
+    clients.currentLeft = 0;
+    clients.top = 50;
+  }
   /* Background BOX */
   screen.append(clients.box[id])
 
