@@ -1,6 +1,7 @@
 'use strict'
 
-var Client = require('./src/service/client');
+/* Use lib directory for more compatibility */
+var Client = require('./lib/service/client');
 
 module.exports = function ( options ) {
 

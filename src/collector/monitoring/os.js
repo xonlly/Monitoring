@@ -88,19 +88,19 @@ class OsMonitor {
 
   osGetAll() {
     return {
-      name : os.hostname() || false,
-      arch: os.arch() || false,
-      cpus: os.cpus() || false,
-      freemem: os.freemem() || false,
-      totalmem: os.totalmem() || false,
+      name : os.hostname ? os.hostname() : false,
+      arch: os.arch ? os.arch() : false,
+      cpus: os.cpus ? os.cpus() : false,
+      freemem: os.freemem ? os.freemem() : false,
+      totalmem: os.totalmem ? os.totalmem() : false,
       mempourcent: 100 - (os.freemem() * 100 / os.totalmem()),
-      homedir: os.homedir() || false,
-      loadavg: os.loadavg() || false,
-      networkInterfaces: os.networkInterfaces() || false,
-      platform: os.platform() || false,
-      release: os.release() || false,
-      type: os.type() || false,
-      uptime: os.uptime() || false,
+      homedir: os.homedir ? os.homedir() : false,
+      loadavg: os.loadavg ? os.loadavg() : false,
+      networkInterfaces: os.networkInterfaces ? os.networkInterfaces() : false,
+      platform: os.platform ? os.platform() : false,
+      release: os.release ? os.release() : false,
+      type: os.type ? os.type() : false,
+      uptime: os.uptime ? os.uptime() : false,
       cpuAverage: this.currentCPU,
     }
   }

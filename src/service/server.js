@@ -1,7 +1,7 @@
 "use strict";
 
-var Socket = require('../collector/socket')
-var Log = require('../utils/log')
+const Socket = require('../collector/socket')
+const Log = require('../utils/log')
 
 class Server extends Socket {
 
@@ -17,8 +17,3 @@ class Server extends Socket {
 }
 
 module.exports = Server;
-
-/* Temp demo /* */
-
-
-/* */
