@@ -6,6 +6,8 @@ ___
 
 ![Monitoring exemple](img/exemple.png)
 
+![Monitoring exemple](img/exemple.gif)
+
 ___
 
 # My node project

@@ -137,6 +137,7 @@ function setClient(id) {
   clients.list.push(id);
 
   clients.box[id] = blessed.box({
+    content : id,
     top: clients.top + '%+' +clientsOps.top,
     left: clientsOps.marginLeft + (clients.currentLeft * (clientsOps.width +10)+5),
     width: clientsOps.width,
