@@ -9,7 +9,7 @@
     "display": "node ./display.js",
     "server": "node ./src/server.js",
     "client": "node ./src/client.js",
-    "client0x": "babel-node --presets es2015 -- ./src/client.js"
+    "convert": "babel --presets es2015 src -d lib"
   },
   "repository": {
     "type": "git",
