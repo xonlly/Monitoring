@@ -31,16 +31,16 @@ socket.on('connect', function(){
 socket.on('isAuth', function (data) {
   if (data.success) {
 
-    statusBar.setText('Status: online');
-    statusBar.style.bg = 'default'
-    statusBar.style.fg = 'green'
+    topBar.setText('Status: online');
+    topBar.style.bg = 'default'
+    topBar.style.fg = 'green'
     screen.render();
     socket.emit('room', 'client')
 
   } else {
 
-    statusBar.setText('Status: Security key not valid.');
-    statusBar.style.fg = 'red'
+    topBar.setText('Status: Security key not valid.');
+    topBar.style.fg = 'red'
     screen.render();
 
   }
@@ -62,9 +62,9 @@ socket.on('update', function(data){
 });
 
 socket.on('disconnect', function(){
-  statusBar.style.bg = 'red'
-  statusBar.style.fg = 'black'
-  statusBar.setText('Status: disconnected');
+  topBar.style.bg = 'red'
+  topBar.style.fg = 'black'
+  topBar.setText('Status: disconnected');
   //progress.setProgress(10);
   screen.render();
 });
@@ -137,7 +137,6 @@ function setClient(id) {
   clients.list.push(id);
 
   clients.box[id] = blessed.box({
-    content: 'Serveur: ' + id,
     top: clients.top + '%+' +clientsOps.top,
     left: clientsOps.marginLeft + (clients.currentLeft * (clientsOps.width +10)+5),
     width: clientsOps.width,
@@ -270,13 +269,14 @@ screen.title = 'my window title';
 
 
 // Create a box perfectly centered horizontally and vertically.
-var statusBar = blessed.box({
+var backgroundBox = blessed.box({
 /*  top: 'center',
   left: 'center',*/
+  top: 2,
   left: 0,
   width: '100%',
-  height: '100%-1',
-  content: 'Status: ' + status,
+  height: '100%-4',
+  //content: 'Status: ' + status,
   tags: true,
   border: {
     type: 'line'
@@ -285,7 +285,31 @@ var statusBar = blessed.box({
     fg: 'white',
     bg: 'default',
     border: {
-      fg: '#f0f0f0'
+      fg: 'yellow'
+    },
+    hover: {
+      bg: 'green'
+    }
+  }
+});
+
+var topBar = blessed.box({
+/*  top: 'center',
+  left: 'center',*/
+  top:0,
+  left: 0,
+  width: '100%',
+  height: 3,
+  content: 'Status: ' + status,
+  tags: true,
+  border: {
+    type: 'line'
+  },
+  style: {
+    fg: 'white',
+    bg: 'red',
+    border: {
+      fg: 'yellow'
     },
     hover: {
       bg: 'green'
@@ -295,7 +319,8 @@ var statusBar = blessed.box({
 
 // Append our box to the screen.
 
-screen.append(statusBar);
+screen.append(backgroundBox);
+screen.append(topBar);
 
 
 /* For test */
