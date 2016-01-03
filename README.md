@@ -1,8 +1,36 @@
-# Monitoring
+# Monitoring easy
 
-Systeme de monitoring de serveur, rapide d'installation et simple d'utilisation.
+Server monitoring system, rapid installation and simple to use.
 
-# For use
+___
+
+![Monitoring exemple](img/exemple.png)
+
+___
+
+# My node project
+
+```bash
+  npm install monitoring-easy
+```
+
+```javascript
+require('monitoring-easy')({
+  /* All is optional */
+  name : 'MyProject',
+  host : 'yourServer.fr',
+  port : 8156,
+  key : '456DAde486qD684de6'
+})
+```
+
+___
+
+# My serveur
+
+```bash
+  npm install monitoring-easy
+```
 
 ## Run new "client" server
 
@@ -16,7 +44,9 @@ Systeme de monitoring de serveur, rapide d'installation et simple d'utilisation.
 
 `node run display` or `node ./display -p port -h host -k key`
 
-# Change "definitive" config
+___
+
+# Change config for server monitoring
 
 ## Client
 
@@ -34,8 +64,9 @@ Go to ./display and edit config
 
 The webdisplay is coming soon
 
+___
 # Current todolist
 
 - Web Display
-- Client compatibility node 0.x
+- ~~Client compatibility node 0.x~~
 - Forever script
