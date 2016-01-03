@@ -8,7 +8,8 @@
     "build": "babel --presets react www/js --watch --out-dir www/build",
     "display": "node ./display.js",
     "server": "node ./src/server.js",
-    "client": "node ./src/client.js"
+    "client": "node ./src/client.js",
+    "client0x": "babel-node --presets es2015 -- ./src/client.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/xonlly/Monitoring#readme",
   "dependencies": {
+    "babel": "^6.3.26",
     "blessed": "^0.1.81",
     "colors": "^1.1.2",
     "socket.io": "^1.3.7",
