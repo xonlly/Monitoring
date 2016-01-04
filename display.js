@@ -102,11 +102,17 @@ function upClient(id, os, online) {
 //  console.log(os.cpuAverage);
 
   clients.box[id].style.bg = online ? 'white' : 'red'
+  clients.average[id].style.bg = online ? 'white' : 'red'
 
+  var cpuPourcent = Math.floor(os.cpuAverage);
   clients.cpu[id].setProgress(Math.floor(os.cpuAverage));
+  clients.cpu[id].style.bar.bg = cpuPourcent < 50 ? 'green' : cpuPourcent < 80 ? 'orange' : 'red';
   clients.textCPU[id].setText('CPU\r\n' + Math.floor(os.cpuAverage)+'%');
 
-  clients.ram[id].setProgress(Math.floor(os.mempourcent));
+  var ramPourcent = Math.floor(os.mempourcent);
+  clients.ram[id].setProgress(ramPourcent);
+  clients.ram[id].style.bar.bg = ramPourcent < 50 ? 'green' : ramPourcent < 80 ? 'orange' : 'red';
+
   clients.textRAM[id].setText('RAM\r\n' + Math.floor(os.mempourcent)+'%');
 
   clients.average[id].setContent('Average: \
@@ -156,12 +162,11 @@ function setClient(id) {
       fg: 'blue',
       bg: 'default',
       bar: {
-        bg: 'red',
+        bg: 'green',
         fg: 'blue'
       },
       border: {
         fg: 'default',
-        bg: 'default'
       }
     },
     ch: '',
@@ -187,7 +192,6 @@ function setClient(id) {
       },
       border: {
         fg: 'default',
-        bg: 'default'
       }
     },
     ch: '',
@@ -230,8 +234,8 @@ function setClient(id) {
     content: 'Avg',
     left: clientsOps.marginLeft + (clients.currentLeft * (clientsOps.width + 10) + 7),
     style: {
-      bg: 'white',
       fg: 'black',
+      bg: 'white',
     },
     //align: 'center',
     top: (clients.top )+ '%+6'
