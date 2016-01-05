@@ -16,7 +16,7 @@ module.exports = function(ifaces, tick) {
       process = 'ifstat'
       break;
     default:
-      return Log.error('Os '+os.platform()+' not supported.')
+      return Log.err('Os '+os.platform()+' not supported.')
   }
 
   const ifstatExist = () => {
@@ -53,13 +53,13 @@ module.exports = function(ifaces, tick) {
     });
 
     ifstat.stderr.on('data', function(data) {
-      Log.error('ifstat error:', data.toString());
+      Log.err('ifstat error:', data.toString());
     });
 
     ifstat.on('close', function(code) {
-      Log.error('ifstat closed with code:', code);
+      Log.err('ifstat closed with code:', code);
     });
   }).catch(() => {
-    Log.error('ifstat is not installed on system.');
+    Log.err('ifstat is not installed on system.');
   })
 };
