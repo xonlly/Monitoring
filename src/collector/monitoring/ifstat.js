@@ -19,7 +19,22 @@ module.exports = function(ifaces, tick) {
       return Log.error('Os '+os.platform()+' not supported.')
   }
 
-  try {
+  const ifstatExist = () => {
+    return new Promise((resolve, fail) => {
+      if (os.platform() == 'win32') return resolve();
+
+      child_process.exec('command -v ifstat', function (error, stdout, stderr) {
+        if (stderr == '') {
+          return fail();
+        } else {
+          return resolve();
+        }
+      })
+    })
+  }
+
+  ifstatExist().then(() => {
+
     var ifstat = child_process.spawn(process, [
       '-w', '-n'/*, '-i', ifaces.join(',')*/
     ]), firstTick = true;
@@ -44,7 +59,7 @@ module.exports = function(ifaces, tick) {
     ifstat.on('close', function(code) {
       Log.error('ifstat closed with code:', code);
     });
-  } catch (e) {
+  }).catch(() => {
     Log.erro('ifstat is not installed on system.');
-  }
+  })
 };
