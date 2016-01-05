@@ -60,6 +60,6 @@ module.exports = function(ifaces, tick) {
       Log.error('ifstat closed with code:', code);
     });
   }).catch(() => {
-    Log.erro('ifstat is not installed on system.');
+    Log.error('ifstat is not installed on system.');
   })
 };
