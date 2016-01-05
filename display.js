@@ -106,14 +106,21 @@ function upClient(id, os, online) {
 
   var cpuPourcent = Math.floor(os.cpuAverage);
   clients.cpu[id].setProgress(Math.floor(os.cpuAverage));
-  clients.cpu[id].style.bar.bg = cpuPourcent < 50 ? 'green' : cpuPourcent < 80 ? 'orange' : 'red';
+  clients.cpu[id].style.bar.bg = cpuPourcent < 50 ? 'green' : cpuPourcent < 80 ? 'yellow' : 'red';
   clients.textCPU[id].setText('CPU\r\n' + Math.floor(os.cpuAverage)+'%');
 
   var ramPourcent = Math.floor(os.mempourcent);
   clients.ram[id].setProgress(ramPourcent);
-  clients.ram[id].style.bar.bg = ramPourcent < 50 ? 'green' : ramPourcent < 80 ? 'orange' : 'red';
+  clients.ram[id].style.bar.bg = ramPourcent < 50 ? 'green' : ramPourcent < 80 ? 'yellow' : 'red';
 
   clients.textRAM[id].setText('RAM\r\n' + Math.floor(os.mempourcent)+'%');
+
+  var trafficStr = '';
+  if (os.traffic) {
+    for (var i=0; i<os.traffic.length; i++) {
+      trafficStr += 'down: '+os.traffic[i][0]+'kb/s | up: '+os.traffic[i][1]+'kb/s \r\n';
+    }
+  }
 
   clients.average[id].setContent('Average: \
 \r\n\t'+os.loadavg[0]+' 1m \
@@ -128,7 +135,7 @@ function upClient(id, os, online) {
 \r\nRelease: '+ os.release +' \
 \r\n \
 \r\nUpTime: '+toHHMMSS(os.uptime)+' \
-\r\n \
+\r\n'+trafficStr+'\
 \r\n');
 
   screen.render()

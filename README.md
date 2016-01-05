@@ -28,7 +28,7 @@ require('monitoring-easy')({
 
 ___
 
-# My serveur
+# My server
 
 ```bash
   npm install monitoring-easy
@@ -37,6 +37,11 @@ ___
 ## Run new "client" server
 
 `npm run client` or `node ./src/client.js -p port -h host -k key`
+
+### You need get network traffic ?
+
+- On __Linux__ you need ifstat `sudo apt-get install ifstat` or go to download lib http://gael.roualland.free.fr/ifstat/
+- On __Windows__ i have adding ifstat on the project, no command required.
 
 ## Run a master listenner
 

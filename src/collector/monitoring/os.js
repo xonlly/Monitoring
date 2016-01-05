@@ -1,11 +1,21 @@
 "use strict"
 
-const os = require('os')
+const os      = require('os')
+const traffic = require('./ifstat');
 
 class OsMonitor {
 
   constructor() {
     this.listenCpu()
+    this.traffic = [];
+    if (os.networkInterfaces && Object.keys(os.networkInterfaces()).length) {
+
+
+      traffic(Object.keys(os.networkInterfaces()), (traffic) => {
+        this.traffic = traffic
+      })
+    }
+
   }
 
   listenCpu() {
@@ -102,6 +112,7 @@ class OsMonitor {
       type: os.type ? os.type() : false,
       uptime: os.uptime ? os.uptime() : false,
       cpuAverage: this.currentCPU,
+      traffic: this.traffic,
     }
   }
 
