@@ -24,7 +24,7 @@ module.exports = function(ifaces, tick) {
       if (os.platform() == 'win32') return resolve();
 
       child_process.exec('command -v ifstat', function (error, stdout, stderr) {
-        if (stderr == '') {
+        if (stdout == '') {
           return fail();
         } else {
           return resolve();
