@@ -11,6 +11,7 @@ module.exports = function(ifaces, tick) {
     case 'win32':
       process = __dirname + '/win32/ifstat.exe'
       break;
+    case 'darwin':
     case 'linux':
       process = 'ifstat'
       break;
@@ -18,28 +19,32 @@ module.exports = function(ifaces, tick) {
       return Log.error('Os '+os.platform()+' not supported.')
   }
 
-  var ifstat = child_process.spawn(process, [
-    '-w', '-n'/*, '-i', ifaces.join(',')*/
-  ]), firstTick = true;
+  try {
+    var ifstat = child_process.spawn(process, [
+      '-w', '-n'/*, '-i', ifaces.join(',')*/
+    ]), firstTick = true;
 
-  ifstat.stdout.on('data', function(data) {
-    if (!firstTick) {
-      return tick(
-        chunk(
-          data.toString().trim().split(/\s/g).filter(function(line) {
-            return line !== '';
-          }), 2
-        )
-      );
-    }
-    firstTick = false;
-  });
+    ifstat.stdout.on('data', function(data) {
+      if (!firstTick) {
+        return tick(
+          chunk(
+            data.toString().trim().split(/\s/g).filter(function(line) {
+              return line !== '';
+            }), 2
+          )
+        );
+      }
+      firstTick = false;
+    });
 
-  ifstat.stderr.on('data', function(data) {
-    Log.error('ifstat error:', data.toString());
-  });
+    ifstat.stderr.on('data', function(data) {
+      Log.error('ifstat error:', data.toString());
+    });
 
-  ifstat.on('close', function(code) {
-    Log.error('ifstat closed with code:', code);
-  });
+    ifstat.on('close', function(code) {
+      Log.error('ifstat closed with code:', code);
+    });
+  } catch (e) {
+    Log.erro('ifstat is not installed on system.');
+  }
 };

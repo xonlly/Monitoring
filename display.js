@@ -135,8 +135,7 @@ function upClient(id, os, online) {
 \r\nRelease: '+ os.release +' \
 \r\n \
 \r\nUpTime: '+toHHMMSS(os.uptime)+' \
-\r\n'+trafficStr+'\
-\r\n');
+\r\n'+trafficStr);
 
   screen.render()
 }
