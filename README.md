@@ -53,6 +53,60 @@ ___
 
 ___
 
+# Create a custom display
+
+## You need just a simple SocketIO client for get servers infos
+
+```javascript
+
+var socket    = require('socket.io-client')('http://'+yourserver+':'+port);
+
+socket.on('connect', function(){
+  // The master is online
+  // Send a authentif to server
+  socket.emit('auth', security_key);
+});
+
+// Result of authentif
+socket.on('isAuth', function (r) {
+  if (r.success) {
+    // Security key is valid go to next stape
+  } else {
+    // Security key is not valid
+  }
+});
+
+// Informations is updated here, is active then if you are authentified
+socket.on('update', function(data){
+  /*
+  data content:
+
+  name : os.hostname ? os.hostname() : false,
+  arch: os.arch ? os.arch() : false,
+  cpus: os.cpus ? os.cpus() : false,
+  freemem: os.freemem ? os.freemem() : false,
+  totalmem: os.totalmem ? os.totalmem() : false,
+  mempourcent: 100 - (os.freemem() * 100 / os.totalmem()),
+  homedir: os.homedir ? os.homedir() : false,
+  loadavg: os.loadavg ? os.loadavg() : false,
+  networkInterfaces: os.networkInterfaces ? os.networkInterfaces() : false,
+  platform: os.platform ? os.platform() : false,
+  release: os.release ? os.release() : false,
+  type: os.type ? os.type() : false,
+  uptime: os.uptime ? os.uptime() : false,
+  cpuAverage: this.currentCPU,
+  traffic: this.traffic,
+  */
+});
+
+socket.on('disconnect', function(){
+  // the master is offline.
+});
+
+```
+
+___
+
 # Change config for server monitoring
 
 ## Client
