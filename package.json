@@ -1,6 +1,6 @@
 {
   "name": "monitoring-easy",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Monitoring de serveurs / Projets",
   "main": "index.js",
   "scripts": {
