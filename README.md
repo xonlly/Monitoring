@@ -1,3 +1,5 @@
+[![wercker status](https://app.wercker.com/status/9ee8e2311a78e29e80c5c2915743610f/s "wercker status")](https://app.wercker.com/project/bykey/9ee8e2311a78e29e80c5c2915743610f)
+
 # Monitoring easy
 
 Server monitoring system, rapid installation and simple to use.
