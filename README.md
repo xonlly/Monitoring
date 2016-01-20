@@ -1,4 +1,11 @@
 [![wercker status](https://app.wercker.com/status/9ee8e2311a78e29e80c5c2915743610f/s "wercker status")](https://app.wercker.com/project/bykey/9ee8e2311a78e29e80c5c2915743610f)
+[![Build Status](https://travis-ci.org/xonlly/Monitoring.svg?branch=master)](https://travis-ci.org/xonlly/Monitoring)
+[![Dependences](https://david-dm.org/xonlly/Monitoring.svg)](https://david-dm.org/xonlly/Monitoring#info=dependencies&view=table)
+[![Dependences](https://david-dm.org/xonlly/Monitoring/dev-status.svg)](https://david-dm.org/xonlly/Monitoring#info=devDependencies)
+[![npm version](https://badge.fury.io/js/monitoring-easy.svg)](https://badge.fury.io/js/monitoring-easy)
+
+[![NPM](https://nodei.co/npm/monitoring-easy.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/monitoring-easy/)
+[![NPM](https://nodei.co/npm-dl/monitoring-easy.png?months=3&height=3)](https://nodei.co/npm/monitoring-easy/)
 
 # Monitoring easy
 
