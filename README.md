@@ -79,6 +79,10 @@ socket.on('connect', function(){
 // Result of authentif
 socket.on('isAuth', function (r) {
   if (r.success) {
+
+    // Join client room
+    socket.emit('room', 'client')
+    
     // Security key is valid go to next stape
   } else {
     // Security key is not valid
