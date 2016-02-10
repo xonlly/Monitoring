@@ -13,6 +13,7 @@ class Clients extends Rooms {
 
   connection( socket ) {
 
+
     socket.on('auth', (key) => {
       if ( this.options.key == key ) {
         socket.isAuth = true
@@ -21,6 +22,16 @@ class Clients extends Rooms {
         socket.isAuth = false
         socket.emit('isAuth', { success : false, error : 'KEY_IS_NOT_VALID' });
       }
+    })
+
+    socket.on('delete', (name) => {
+
+      if (!this.isAuth( socket )) return;
+
+      Log.err('User delete server ' + name)
+
+      this.deleteServer( name );
+
     })
 
     /* if user need change room */

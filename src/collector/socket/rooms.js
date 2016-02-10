@@ -19,6 +19,13 @@ class Rooms {
         });
 
     }, 1000)
+
+    return this
+  }
+
+  deleteServer( nickname ) {
+    delete this.servers[ nickname ]
+    return this
   }
 
   /**
