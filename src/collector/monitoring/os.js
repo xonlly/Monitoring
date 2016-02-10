@@ -8,11 +8,21 @@ class OsMonitor {
   constructor() {
     this.listenCpu()
     this.traffic = [];
+
+    var platform = os.platform();
+
     if (os.networkInterfaces && Object.keys(os.networkInterfaces()).length) {
 
-
       traffic(Object.keys(os.networkInterfaces()), (traffic) => {
-        this.traffic = traffic
+
+        if (platform != 'win32') {
+          this.traffic = traffic
+        } else {
+          this.traffic = traffic.filter((elem, index) => {
+            if (!traffic[index+1]) return true;
+            return !(elem[0] == traffic[index+1][0] && elem[1] == traffic[index+1][1]);
+          })
+        }
       })
     }
 
