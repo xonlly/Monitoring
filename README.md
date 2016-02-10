@@ -19,7 +19,7 @@ ___
 
 ___
 
-# My node project
+# On my node project
 
 ```bash
   npm install monitoring-easy
@@ -37,7 +37,7 @@ require('monitoring-easy')({
 
 ___
 
-# My server
+# For my server
 
 ```bash
   npm install monitoring-easy
@@ -45,20 +45,20 @@ ___
 
 ## Run new "client" server
 
-`npm run client` or `node ./src/client.js -p port -h host -k key`
+`npm run client` or `node ./src/client.js -p {port} -h {host} -k {key}`
 
 ### You need get network traffic ?
 
 - On __Linux__ you need ifstat `sudo apt-get install ifstat` or go to download lib http://gael.roualland.free.fr/ifstat/
-- On __Windows__ i have adding ifstat on the project, no command required.
+- On __Windows__ i have adding ifstat on the project, no command required, the download is automatically.
 
 ## Run a master listenner
 
-`npm run server` or `node ./src/server.js -p port -k key`
+`npm run server` or `node ./src/server.js -p {port} -k {key}`
 
 ## Run a display for view live monitoring
 
-`node run display` or `node ./display -p port -h host -k key`
+`node run display` or `node ./display -p {port} -h {host} -k {key}`
 
 ___
 
@@ -82,7 +82,7 @@ socket.on('isAuth', function (r) {
 
     // Join client room
     socket.emit('room', 'client')
-    
+
     // Security key is valid go to next stape
   } else {
     // Security key is not valid
@@ -124,23 +124,24 @@ ___
 
 ## Client
 
-Go to ./src/client.js and edit config
+Open file __./src/client.js__ and edit config object.
 
 ## Server
 
-Go to ./src/server.js and edit config
+Open file __./src/server.js__ and edit config object.
 
 ## Display
 
-Go to ./display and edit config
+Open file __./display__ and edit config object.
 
 # WebDisplay
 
-The webdisplay is coming soon
+The webdisplay is coming soon on [Monitoring-www](https://github.com/xonlly/Monitoring-www)
 
 ___
 # Current todolist
 
-- Web Display
+- Web Display (__work in progress on [Monitoring-www](https://github.com/xonlly/Monitoring-www)__)
+- ~~Network traffic (windows & linux)~~
 - ~~Client compatibility node 0.x~~
 - Forever script
