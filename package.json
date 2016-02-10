@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --content-base src/",
-    "build": "babel --presets react www/js --watch --out-dir www/build",
     "display": "node ./display.js",
     "server": "node ./src/server.js",
     "client": "node ./src/client.js",
