@@ -7,7 +7,9 @@ var config    = {
   port    : args.port   || 8156,
   key     : args.key    || '456DAde486qD684de6'
 };
-var socket    = require('socket.io-client')('http://'+config.server+':'+config.port);
+var socket    = require('socket.io-client')('http://'+config.server+':'+config.port, {
+  timeout : 6000
+});
 
 var toHHMMSS = function (number) {
     var sec_num = parseInt(number, 10); // don't forget the second param
