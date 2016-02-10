@@ -1,6 +1,6 @@
 {
   "name": "monitoring-easy",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Monitoring de serveurs / Projets",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "server": "node ./src/server.js",
     "client": "node ./src/client.js",
     "convert": "babel --presets es2015 src -d lib",
-    "test" : ""
+    "test": ""
   },
   "repository": {
     "type": "git",
