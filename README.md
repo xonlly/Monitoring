@@ -13,10 +13,18 @@ Server monitoring system, rapid installation and simple to use.
 
 ___
 
+## Preview
+
 ![Monitoring exemple](img/exemple.png)
 
-![Monitoring exemple](img/exemple.gif)
+## Console interface
 
+![Console interface](img/exemple.gif)
+
+## Web interface ( Work in progress )
+
+![Web interface](https://github.com/xonlly/Monitoring-www/raw/master/readme/monitoringv2.gif)
+-> [Monitoring-www](https://github.com/xonlly/Monitoring-www)
 ___
 
 # On my node project
