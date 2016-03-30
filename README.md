@@ -9,6 +9,8 @@
 
 # Monitoring easy
 
+[![Join the chat at https://gitter.im/xonlly/Monitoring](https://badges.gitter.im/xonlly/Monitoring.svg)](https://gitter.im/xonlly/Monitoring?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Server monitoring system, rapid installation and simple to use.
 
 ___
